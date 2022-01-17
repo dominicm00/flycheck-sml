@@ -4,7 +4,7 @@
 ;; Author: Dominic Martinez <dom@dominic.dev>
 ;; Created: 16 Jan 2022
 ;; Homepage: https://gitlab.com/dominicm00/flycheck-sml
-;; Version: 0.0.1
+;; Version: 0.0.2
 ;; Package-Requires ((flycheck) (sml-mode))
 ;; Keywords: convenience, languages, tools
 
@@ -37,19 +37,24 @@
 See URL `http://www.smlnj.org/`"
   :command ("sml")
   :standard-input t
+
+  ;; These error patterns are a bit hacky due to how SML/NJ formats
+  ;; errors. The end of a message is determined by either the start of
+  ;; another error ("s" at start of line), a REPL prompt ("-" at start
+  ;; of line), or the end of output ("\n" at start of line). We match
+  ;; the message non-greedily on all characters until we reach one of
+  ;; these end markers, and then make those characters optionally
+  ;; match at the beginning of the error since they may have been
+  ;; captured by the previous error.
   :error-patterns
-  ((warning line-start
-            (optional "- ") (optional "= ") "stdIn:"
+  ((warning (optional "- ") (optional "= ") (optional "s") "tdIn:"
             line "." column (optional "-" end-line "." end-column)
-            " Warning: " (message)
-            line-end)
+            " Warning: " (message (+? anychar)) line-start (or "s" "-" "\n"))
    
    ;; Match type errors
-   (error line-start
-          (optional "- ") (optional "= ") "stdIn:"
+   (error (optional "- ") (optional "= ") (optional "s") "tdIn:"
           line "." column (optional "-" end-line "." end-column)
-          " Error: " (message)
-          line-end)
+          " Error: " (message (+? anychar)) line-start (or "s" "-" "\n"))
 
    ;; Match exceptions
    (error line-start
