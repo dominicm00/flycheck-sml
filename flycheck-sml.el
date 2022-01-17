@@ -4,7 +4,7 @@
 ;; Author: Dominic Martinez <dom@dominic.dev>
 ;; Created: 16 Jan 2022
 ;; Homepage: https://gitlab.com/dominicm00/flycheck-sml
-;; Version: 0.0.2
+;; Version: 0.1.0
 ;; Package-Requires ((flycheck) (sml-mode))
 ;; Keywords: convenience, languages, tools
 
