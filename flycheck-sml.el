@@ -27,6 +27,13 @@
 ;; This package provides minimal Standard ML checking through SML/NJ.
 ;; No other Standard ML compilers are currently supported.
 
+;;; WARNING
+;; SML/NJ does not appear to be able to type check code snippets
+;; without running them in the REPL.  This means that this checker
+;; **will execute code exactly how it works in the REPL, including
+;; side effects**.  Please only use this with caution on code that you
+;; trust until a solution is found.
+
 ;;; Code:
 
 (require 'flycheck)
