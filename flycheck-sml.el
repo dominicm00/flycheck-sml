@@ -22,22 +22,18 @@
 See URL `http://www.smlnj.org/`"
   :command ("sml")
   :standard-input t
-  ;; Don't increment columns
-  :error-filter
-  (lambda (errors)
-    (flycheck-increment-error-columns errors -1))
   :error-patterns
   ((warning line-start
-            "- " (optional "= ") "stdIn:"
+            (optional "- ") (optional "= ") "stdIn:"
             line "." column (optional "-" end-line "." end-column)
-            " Warning: " (message (one-or-more (not "-")))
+            " Warning: " (message)
             line-end)
    
    ;; Match type errors
    (error line-start
-          "- " (optional "= ") "stdIn:"
+          (optional "- ") (optional "= ") "stdIn:"
           line "." column (optional "-" end-line "." end-column)
-          " Error: " (message (one-or-more (not "-")))
+          " Error: " (message)
           line-end)
 
    ;; Match exceptions
