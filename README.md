@@ -14,7 +14,9 @@ until a solution is found.
 
 ## Installation
 
-[SML/NJ](http://www.smlnj.org/) is required for this checker.
+[SML/NJ](http://www.smlnj.org/) and
+[flycheck](https://github.com/flycheck/flycheck) are required for this
+checker.
 
 Include `flycheck-sml.el` in your `init.el`. flycheck-sml is currently
 not available through MELPA or the official flycheck repo and must be
